@@ -1,17 +1,74 @@
-async function sendMessage(){
-
-    let input = document.getElementById("input");
-
-    let message = input.value;
+const API_URL = "http://127.0.0.1:8000/chat";
 
 
-    document.getElementById("messages").innerHTML +=
-    "<p><b>Te:</b> " + message + "</p>";
+const messages = document.getElementById("messages");
+const input = document.getElementById("input");
+const send = document.getElementById("send");
 
 
-    let response = await fetch(
-        "http://127.0.0.1:8000/chat",
-        {
+
+function addMessage(text, type) {
+
+    const message = document.createElement("div");
+
+    message.className = "message " + type;
+
+
+    if(type === "ai") {
+
+        message.innerHTML = `
+            <div class="avatar">
+                AI
+            </div>
+
+            <div class="bubble">
+                ${text}
+            </div>
+        `;
+
+    } else {
+
+        message.innerHTML = `
+            <div class="bubble">
+                ${text}
+            </div>
+        `;
+
+    }
+
+
+    messages.appendChild(message);
+
+
+    messages.scrollTop = messages.scrollHeight;
+
+}
+
+
+
+
+async function sendMessage() {
+
+
+    const text = input.value.trim();
+
+
+    if(!text) return;
+
+
+
+    addMessage(text,"user");
+
+
+    input.value = "";
+
+
+
+    try {
+
+
+        const response = await fetch(API_URL, {
+
             method:"POST",
 
             headers:{
@@ -19,18 +76,66 @@ async function sendMessage(){
             },
 
             body:JSON.stringify({
-                message: message
+
+                message:text
+
             })
-        }
-    );
+
+        });
 
 
-    let data = await response.json();
+
+        const data = await response.json();
 
 
-    document.getElementById("messages").innerHTML +=
-    "<p><b>AI:</b> " + data.answer + "</p>";
+
+        addMessage(
+            data.answer,
+            "ai"
+        );
 
 
-    input.value="";
+
+    }
+
+    catch(error) {
+
+
+        addMessage(
+            "Hiba történt a szerver elérésénél.",
+            "ai"
+        );
+
+
+        console.error(error);
+
+    }
+
+
 }
+
+
+
+send.addEventListener(
+    "click",
+    sendMessage
+);
+
+
+
+input.addEventListener(
+    "keydown",
+    (event)=>{
+
+
+        if(event.key==="Enter" && !event.shiftKey){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+
+    }
+);

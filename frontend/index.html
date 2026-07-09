@@ -1,35 +1,138 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="hu">
 <head>
-    <title>AI Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Hub</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
-<div class="chat">
 
-    <h1>AI Asszisztens</h1>
-
-    <div id="messages"></div>
+<div class="app">
 
 
-    <input 
-        id="input"
-        placeholder="Írj valamit..."
-    >
+    <aside class="sidebar">
 
-    <button onclick="sendMessage()">
-        Küldés
-    </button>
+        <div class="logo">
+            <span>✦</span>
+            AI Hub
+        </div>
+
+
+        <p class="subtitle">
+            Choose your AI assistant
+        </p>
+
+
+        <div class="bots">
+
+
+            <button class="bot active" data-bot="programmer">
+                <span>💻</span>
+                AI Programmer
+            </button>
+
+
+            <button class="bot" data-bot="investor">
+                <span>📈</span>
+                Investment Banker
+            </button>
+
+
+            <button class="bot" data-bot="math_teacher">
+                <span>📐</span>
+                Math Teacher
+            </button>
+
+
+            <button class="bot" data-bot="custom">
+                <span>🧠</span>
+                Custom AI
+            </button>
+
+
+        </div>
+
+
+        <div class="footer">
+            Powered by AI
+        </div>
+
+
+    </aside>
+
+
+
+
+    <main class="chat">
+
+
+        <header class="chat-header">
+
+            <h1>
+                <span id="botIcon">💻</span>
+                <span id="botName">
+                    AI Programmer
+                </span>
+            </h1>
+
+            <div class="status">
+                ● Online
+            </div>
+
+        </header>
+
+
+
+        <div id="messages" class="messages">
+
+
+            <div class="message ai">
+
+                <div class="avatar">
+                    AI
+                </div>
+
+                <div class="bubble">
+                    Hello! How can I help you today?
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="input-area">
+
+
+            <textarea
+                id="input"
+                placeholder="Write your message..."
+            ></textarea>
+
+
+            <button id="send">
+                ➤
+            </button>
+
+
+        </div>
+
+
+    </main>
+
 
 </div>
+
 
 
 <script src="script.js"></script>
 
 </body>
-
 </html>

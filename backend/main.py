@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from groq import Groq
+from dotenv import load_dotenv
+import os
 
 
 app = FastAPI()
@@ -17,7 +19,7 @@ app.add_middleware(
 
 # Groq kliens
 client = Groq(
-    api_key="https://console.groq.com/keys" # get api key from here
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
 

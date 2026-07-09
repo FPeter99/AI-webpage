@@ -11,7 +11,7 @@ A simple AI chat website using **FastAPI, Python and JavaScript**.
 
 ## Install packages
 
-Open terminal:
+Open a terminal in the project folder:
 
 ```bash
 pip install -r requirements.txt
@@ -24,7 +24,21 @@ You need an API key from one of these providers:
 * OpenRouter: https://openrouter.ai
 * Groq: https://console.groq.com
 
-Add your API key in the backend code.
+Create a `.env` file inside the `backend` folder:
+
+```text
+backend
+│
+├── main.py
+└── .env
+```
+
+Add your API keys to the `.env` file:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+OPENROUTER_API_KEY=your_openrouter_api_key
+```
 
 ## Run Backend
 
@@ -37,13 +51,13 @@ py -m uvicorn main:app --reload
 
 Backend:
 
-```
+```text
 http://127.0.0.1:8000
 ```
 
-API docs:
+API documentation:
 
-```
+```text
 http://127.0.0.1:8000/docs
 ```
 
@@ -53,7 +67,7 @@ Open `frontend/index.html` in Visual Studio Code.
 
 Right click:
 
-```
+```text
 Open with Live Server
 ```
 
@@ -61,14 +75,18 @@ The website will open in your browser.
 
 ## Project Structure
 
-```
+```text
 AI-webpage
 │
 ├── backend
-│   └── main.py
+│   ├── main.py
+│   └── .env
 │
-└── frontend
-    ├── index.html
-    ├── style.css
-    └── script.js
+├── frontend
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── requirements.txt
+└── README.md
 ```

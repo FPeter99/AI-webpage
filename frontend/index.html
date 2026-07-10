@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Hub</title>
+<title>1367</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,67 +17,153 @@
 <body>
 
 
+<div class="background-glow"></div>
+
+
+
 <div class="app">
 
 
-<aside class="sidebar">
+
+<!-- MENU BUTTON -->
 
 
-<div class="logo">
+<button id="menuButton" class="menu-button">
 
-<span>✦</span>
+<span></span>
+<span></span>
+<span></span>
 
-AI Hub
+</button>
+
+
+
+
+
+
+<!-- SIDE MENU -->
+
+
+<aside id="sideMenu" class="side-menu">
+
+
+<div class="brand">
+
+
+<div class="brand-icon">
+
+✦
 
 </div>
 
 
-<p class="subtitle">
-Choose your AI assistant
-</p>
+<div>
 
+<!-- titel-->
 
-
-<div class="bots">
-
-
-<button class="bot active">
-
-💻 AI Programmer
-
-</button>
-
-
-<button class="bot">
-
-📈 Investment Banker
-
-</button>
-
-
-<button class="bot">
-
-📐 Math Teacher
-
-</button>
-
-
-<button class="bot">
-
-🧠 Custom AI
-
-</button>
+</div>
 
 
 </div>
 
 
 
-<div class="footer">
 
-Powered by AI
+
+<div class="menu-content">
+
+
+<button class="menu-item"
+onclick="location.href='api.html'">
+
+<span>
+🔑
+</span>
+
+API Keys
+
+</button>
+
+
+
+
+<button class="menu-item"
+onclick="location.href='settings.html'">
+
+<span>
+⚙
+</span>
+
+Settings
+
+</button>
+
+
+
+
+<button class="menu-item">
+
+<span>
+✨
+</span>
+
+Create Custom AI
+
+</button>
+
+
 
 </div>
+
+
+
+
+
+
+<div class="assistant-title">
+
+Assistants
+
+</div>
+
+
+
+
+<button class="assistant active">
+
+💻
+Programmer AI
+
+</button>
+
+
+
+<button class="assistant">
+
+📈
+Investment AI
+
+</button>
+
+
+
+<button class="assistant">
+
+📐
+Math Teacher
+
+</button>
+
+
+
+<button class="assistant">
+
+🧠
+General AI
+
+</button>
+
+
 
 
 </aside>
@@ -85,25 +171,42 @@ Powered by AI
 
 
 
+
+
+
+<!-- CHAT -->
+
+
 <main class="chat">
+
+
+
+
 
 
 <header class="chat-header">
 
 
-<h1>
+<div class="ai-name">
+
 
 <span id="botIcon">
+
 💻
+
 </span>
+
 
 
 <span id="botName">
+
 AI Programmer
+
 </span>
 
 
-</h1>
+</div>
+
 
 
 
@@ -113,14 +216,9 @@ AI Programmer
 
 
 
-<div class="status">
-
-● Online
-
-</div>
-
-
 </header>
+
+
 
 
 
@@ -129,14 +227,10 @@ AI Programmer
 <div id="messages" class="messages">
 
 
+
+
+
 <div class="message ai">
-
-
-<div class="avatar">
-
-AI
-
-</div>
 
 
 <div class="bubble">
@@ -149,92 +243,164 @@ Hello! How can I help you today?
 </div>
 
 
-</div>
 
-
-<div class="api-section">
-
-<h3>Groq API kulcs</h3>
-
-
-<input
-id="groqApiKey"
-placeholder="gsk_..."
->
-
-
-<button id="saveApiKey">
-Mentés
-</button>
 
 
 </div>
 
 
-<div class="input-area">
+
+
+
+
+
+
+<div class="input-wrapper">
+
+
+<div class="input-box">
 
 
 <textarea
+
 id="input"
-placeholder="Write your message..."
+
+placeholder="Message AI Hub..."
+
 ></textarea>
+
 
 
 
 <button id="send">
 
+
 ➤
+
 
 </button>
 
 
+
 </div>
+
+
+</div>
+
+
+
 
 
 
 </main>
 
 
+
+
+
 </div>
 
 
 
+
+
+
+
+<script src="./src/theme.js"></script>
+
 <script src="./src/auth.js"></script>
+
 <script src="./src/script.js"></script>
+
+
+
+
 
 <script>
 
-async function checkUser(){
-
-    const token = localStorage.getItem("token");
 
 
-    if(!token){
-
-        window.location.href="login.html";
-
-        return;
-    }
+function checkUser(){
 
 
-    const user =
-        JSON.parse(localStorage.getItem("user"));
+const token =
+localStorage.getItem("token");
 
 
-    console.log(
-        "Belépve:",
-        user.email
-    );
+if(!token){
+
+window.location.href="login.html";
+
+return;
 
 }
+
+
+
+const user =
+JSON.parse(
+localStorage.getItem("user")
+);
+
+
+
+if(user){
+
+document.getElementById(
+"userInfo"
+).innerText =
+user.email;
+
+}
+
+
+}
+
+
 
 
 checkUser();
 
 
 
-</script>
-</body>
 
+
+
+const menuButton =
+document.getElementById(
+"menuButton"
+);
+
+
+
+const sideMenu =
+document.getElementById(
+"sideMenu"
+);
+
+
+
+menuButton.onclick = ()=>{
+
+
+sideMenu.classList.toggle(
+"open"
+);
+
+
+menuButton.classList.toggle(
+"active"
+);
+
+
+};
+
+
+
+</script>
+
+
+
+</body>
 
 </html>

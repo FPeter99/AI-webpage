@@ -69,28 +69,7 @@ input.addEventListener("keydown",(e)=>{
     }
 });
 
-const saveApiButton =
-document.getElementById("saveApiKey");
 
-
-
-async function saveGroqKey(){
-
-
-const key =
-document.getElementById(
-"groqApiKey"
-).value.trim();
-
-
-
-if(!key){
-
-alert("Adj meg API kulcsot!");
-
-return;
-
-}
 
 
 
@@ -99,51 +78,3 @@ localStorage.getItem("token");
 
 
 
-const response =
-await fetch(
-"http://127.0.0.1:8000/save-groq-key",
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json",
-
-"Authorization":
-"Bearer "+token
-
-},
-
-body:JSON.stringify({
-
-api_key:key
-
-})
-
-});
-
-
-const data =
-await response.json();
-
-
-console.log(data);
-
-
-
-if(data.success){
-
-alert(
-"API kulcs elmentve!"
-);
-
-}
-
-
-}
-
-
-
-saveApiButton.onclick =
-saveGroqKey;

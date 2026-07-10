@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>API Settings</title>
+
+</head>
+
+
+<body>
+
+
+<h1>
+API Keys
+</h1>
+
+
+<h3>
+Groq API kulcs
+</h3>
+
+
+<input
+id="groqApiKey"
+placeholder="gsk_..."
+>
+
+
+
+<button id="saveApiKey">
+Mentés
+</button>
+
+
+
+<p id="message"></p>
+
+
+
+<script src="./src/api.js"></script>
+
+
+<script>
+
+
+const token =
+localStorage.getItem("token");
+
+
+
+if(!token){
+
+    window.location.href="login.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

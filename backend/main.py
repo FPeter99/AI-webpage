@@ -123,3 +123,42 @@ def chat(data: ChatRequest):
         "answer": response.choices[0].message.content
     }
 
+
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    username: str
+
+
+
+@app.post("/register")
+def register(data: RegisterRequest):
+
+    try:
+
+        response = supabase.auth.sign_up(
+            {
+                "email": data.email,
+                "password": data.password,
+
+                "options": {
+                    "data": {
+                        "username": data.username
+                    }
+                }
+            }
+        )
+
+
+        return {
+            "success": True,
+            "message": "Ellenőrizd az emaileidet!"
+        }
+
+
+    except Exception as e:
+
+        return {
+            "success": False,
+            "error": str(e)
+        }

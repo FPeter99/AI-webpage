@@ -5,6 +5,8 @@ from groq import Groq
 from dotenv import load_dotenv
 from supabase import create_client
 import os
+from fastapi import Header
+
 
 
 load_dotenv()
@@ -162,3 +164,53 @@ def register(data: RegisterRequest):
             "success": False,
             "error": str(e)
         }
+    
+
+class GroqKeyRequest(BaseModel):
+    api_key: str
+
+@app.post("/save-groq-key")
+def save_groq_key(
+    data: GroqKeyRequest,
+    authorization: str = Header()
+):
+
+    token = authorization.replace(
+        "Bearer ",
+        ""
+    )
+
+
+    # user lekérése
+    user_response = supabase.auth.get_user(token)
+
+    user_id = user_response.user.id
+
+
+    # külön supabase kliens user tokennel
+    user_supabase = create_client(
+        os.getenv("SUPABASE_URL"),
+        os.getenv("SUPABASE_KEY")
+    )
+
+
+    user_supabase.auth.set_session(
+        token,
+        token
+    )
+
+
+    response = user_supabase.table(
+        "groq_api_keys"
+    ).insert({
+
+        "user_id": user_id,
+        "api_key": data.api_key
+
+    }).execute()
+
+
+    return {
+        "success": True,
+        "data": response.data
+    }
